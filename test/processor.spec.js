@@ -1,9 +1,12 @@
+var fs = require('fs');
+var path = require('path');
 var Processor = require('../index');
-var Processor = require('path');
+var execSync = require('child_process').execSync;
+
 
 describe("MD5 Process", function () {
     it("generate md5", function (done) {
-    	processor.md5({
+    	Processor.md5({
             baseUrl: path.resolve(__dirname, 'test-md5'),
             domain: "",
             exts: ['.js'],
@@ -12,6 +15,10 @@ describe("MD5 Process", function () {
             ],
             outputDir: path.resolve(__dirname, 'tmp')
         });
-    	expect(fs.existsSync(path.resolve(__dirname, 'tmp'))).to.be.true;
-    }
-}
+        setTimeout(function () {
+        	var tmp = path.resolve(__dirname, 'tmp');
+        	execSync('rm -rf ' + tmp)
+        	done(fs.existsSync(tmp));
+        }, 1000);
+    });
+});
