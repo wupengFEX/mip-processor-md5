@@ -7,7 +7,7 @@ var execSync = require('child_process').execSync;
 describe("MD5 Process", function () {
     it("generate md5", function (done) {
     	Processor.md5({
-            baseUrl: path.resolve(__dirname, 'test-md5'),
+            baseDir: path.resolve(__dirname, 'test-md5'),
             domain: "",
             exts: ['.js'],
             paths: [
